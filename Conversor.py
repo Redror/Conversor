@@ -5,6 +5,7 @@ import fitz  # PyMuPDF
 from PIL import Image
 from PyPDF2 import PdfReader, PdfWriter
 from natsort import natsorted
+import pillow_avif
 
 # --- FUNÇÕES DE OBTENÇÃO DE CAMINHO ---
 
@@ -96,7 +97,7 @@ def processar_arquivo_cbz(caminho_cbz):
         with tempfile.TemporaryDirectory() as temp_dir:
             with zipfile.ZipFile(caminho_cbz, 'r') as zf:
                 zf.extractall(temp_dir)
-            arquivos_extraidos = natsorted([f for f in os.listdir(temp_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))])
+            arquivos_extraidos = natsorted([f for f in os.listdir(temp_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.avif'))])
             if arquivos_extraidos:
                 criar_pdf_de_imagens(arquivos_extraidos, temp_dir, caminho_pdf_saida)
             else:
@@ -165,7 +166,7 @@ def converter_pasta_de_imagens():
     pasta_principal = obter_caminho_pasta()
     print(f"\n[→] Processando pasta principal: {pasta_principal}")
     # Processa imagens na pasta raiz
-    imagens_na_raiz = natsorted([f for f in os.listdir(pasta_principal) if os.path.isfile(os.path.join(pasta_principal, f)) and f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))])
+    imagens_na_raiz = natsorted([f for f in os.listdir(pasta_principal) if os.path.isfile(os.path.join(pasta_principal, f)) and f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.avif'))])
     if imagens_na_raiz:
         print(f"\n[i] Encontradas {len(imagens_na_raiz)} imagens na pasta principal.")
         nome_base = os.path.basename(os.path.normpath(pasta_principal))
@@ -177,7 +178,7 @@ def converter_pasta_de_imagens():
         caminho_item = os.path.join(pasta_principal, nome_item)
         if os.path.isdir(caminho_item):
             print(f"\n[→] Processando subpasta: {os.path.basename(caminho_item)}")
-            imagens_sub = natsorted([f for f in os.listdir(caminho_item) if f.lower().endswith(('.jpg', '.jpeg', 'png', '.webp'))])
+            imagens_sub = natsorted([f for f in os.listdir(caminho_item) if f.lower().endswith(('.jpg', '.jpeg', 'png', '.webp', '.avif'))])
             if not imagens_sub:
                 print(f"[!] Nenhuma imagem encontrada em: {os.path.basename(caminho_item)}")
                 continue
