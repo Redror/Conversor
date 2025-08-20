@@ -40,7 +40,7 @@ Os arquivos convertidos serão salvos **no mesmo local** dos arquivos originais.
 
 #### 1\. Converter Pasta com Imagens
 
-  * **Como funciona:** O programa busca por imagens (`.jpg`, `.jpeg`, `.png`, `.webp`) dentro da pasta que você informou e também dentro das subpastas diretas.
+  * **Como funciona:** O programa busca por imagens (`.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`) dentro da pasta que você informou e também dentro das subpastas diretas.
   * **Resultado:** Ele cria um arquivo `.pdf` ou `.cbz` (ou ambos) para cada pasta que contém imagens. O nome do arquivo gerado será o mesmo nome da pasta.
 
 #### 2\. Converter PDF(s) para CBZ(s)
